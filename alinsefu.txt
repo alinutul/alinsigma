@@ -1,0 +1,57 @@
+private ElapsedTime runtime = new ElapsedTime();
+    private DcMotor leftFrontDrive = null;
+    private DcMotor leftBackDrive = null;
+    private DcMotor rightFrontDrive = null;
+    private DcMotor rightBackDrive = null;
+init{
+	 leftFrontDrive  = hardwareMap.get(DcMotor.class, "left_front_drive");
+        leftBackDrive  = hardwareMap.get(DcMotor.class, "left_back_drive");
+        rightFrontDrive = hardwareMap.get(DcMotor.class, "right_front_drive");
+        rightBackDrive = hardwareMap.get(DcMotor.class, "right_back_drive");
+        leftFrontDrive.setDirection(DcMotor.Direction.REVERSE);
+        leftBackDrive.setDirection(DcMotor.Direction.REVERSE);
+        rightFrontDrive.setDirection(DcMotor.Direction.FORWARD);
+        rightBackDrive.setDirection(DcMotor.Direction.FORWARD);
+        telemetry.addData("Status", "Initialized");
+        telemetry.update();
+}
+   
+	@Override
+    public void start() {
+        // Reset the runtime when the play button is pressed
+        runtime.reset();
+    }
+loop{
+
+	if (gamepad2.left_bumper && pressLbumper2) {
+            speedLimit = !speedLimit;
+            pressLbumper2 = false;
+        }
+        if (!gamepad2.left_bumper) pressLbumper2 = true;
+double r = Math.hypot(gamepad2.left_stick_x, -gamepad2.left_stick_y);
+        double robotAngle = Math.atan2(-gamepad2.left_stick_y, gamepad2.left_stick_x) - Math.PI / 4;
+        double rightX = -gamepad2.right_stick_x;
+        double v1 = r * Math.cos(robotAngle) + rightX;
+        double v2 = r * Math.sin(robotAngle) - rightX;
+        double v3 = r * Math.sin(robotAngle) + rightX;
+        double v4 = r * Math.cos(robotAngle) - rightX;
+        if (speedLimit == true) {
+            v1 = v1 / 2.0d;
+            v2 = v2 / 2.0d;
+            v3 /= 2.0d;
+            v4 /= 2.0d;
+        }
+        robot.leftFrontMotor.setPower(v1);
+        robot.rightFrontMotor.setPower(v2);
+        robot.leftRearMotor.setPower(v3);
+        robot.rightRearMotor.setPower(v4);
+}
+
+// toate functiile in clasa robotului
+class CRobot {
+    public DcMotor leftFrontMotor;
+    public DcMotor rightFrontMotor;
+    public DcMotor leftRearMotor;
+    public DcMotor rightRearMotor;
+		}
+
