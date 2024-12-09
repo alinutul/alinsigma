@@ -1,11 +1,11 @@
-                .followTrajectorySequence(drive -> drive.trajectorySequenceBuilder(new Pose2d(-35, -58, Math.toRadians(-90)))
+.followTrajectorySequence(drive -> drive.trajectorySequenceBuilder(new Pose2d(-35, -58, Math.toRadians(-90)))
 
                         .strafeTo(new Vector2d(-6.8,-34))//pune piesa pe submersibil
                         .waitSeconds(1)//pune piesa inclusa
                         .splineTo(new Vector2d(-48,-38),Math.toRadians(90))
                         .waitSeconds(1)//ia piesa noua
                         .turn(Math.toRadians(-45))
-                        .lineTo(new Vector2d(-55,-50))
+                        .strafeTo(new Vector2d(-55,-50))
                         .waitSeconds(1)//pune prima piesa in cos
                         .turn(Math.toRadians(45))
                         .strafeTo(new Vector2d(-57,-50))//sliderele se extind si iau urmatoarea piesa
@@ -15,9 +15,9 @@
                         .waitSeconds(1)//pune a doua piesa in cos
                         .splineTo(new Vector2d(-52,-24),Math.toRadians(180))
                         .waitSeconds(1)//ia ultima piesa
-                        .splineTo(new Vector2d(-55,-53),0)
-                        .turn(Math.toRadians(47))
+                        .strafeTo(new Vector2d(-55,-53))
+                        .turn(Math.toRadians(-135))
                         .waitSeconds(1)//pune ultima piesa in cos
-                        .splineTo(new Vector2d(-30,-7),Math.toRadians(0))//parcare
+                        .splineTo(new Vector2d(-30,-9),Math.toRadians(0))//parcare
                         .turn(Math.toRadians(180))//pozitionare in fata
                         .build());
