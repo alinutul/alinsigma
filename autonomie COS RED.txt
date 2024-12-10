@@ -1,4 +1,4 @@
-.followTrajectorySequence(drive -> drive.trajectorySequenceBuilder(new Pose2d(-35, -58, Math.toRadians(-90)))
+.followTrajectorySequence(drive -> drive.trajectorySequenceBuilder(new Pose2d(-13, -58, Math.toRadians(-90)))
 
                         .strafeTo(new Vector2d(-6.8,-34))//pune piesa pe submersibil
                         .waitSeconds(1)//pune piesa inclusa
@@ -19,5 +19,5 @@
                         .turn(Math.toRadians(-135))
                         .waitSeconds(1)//pune ultima piesa in cos
                         .splineTo(new Vector2d(-30,-9),Math.toRadians(0))//parcare
-                        .turn(Math.toRadians(180))//pozitionare in fata
+                        //.turn(Math.toRadians(180))//pozitionare in fata
                         .build());
